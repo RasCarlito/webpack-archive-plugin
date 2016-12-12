@@ -51,7 +51,7 @@ WebpackArchivePlugin.prototype.apply = function(compiler) {
 		}
 
 		// Add assets
-    const assets = glob.sync(options.entry);
+    const assets = glob.sync(options.entry, { nodir: true });
 
     assets.forEach(function (asset) {
       for(let stream of streams) {
