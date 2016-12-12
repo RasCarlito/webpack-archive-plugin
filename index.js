@@ -3,6 +3,8 @@
 const path = require('path');
 const fs = require('fs');
 const archiver = require('archiver');
+// const mkdirp = require('mkdirp');
+const glob = require('glob');
 
 function WebpackArchivePlugin(options = {}) {
 	if(typeof options === 'string') {
@@ -49,13 +51,13 @@ WebpackArchivePlugin.prototype.apply = function(compiler) {
 		}
 
 		// Add assets
-		for(let asset in compiler.assets) {
-			if(compiler.assets.hasOwnProperty(asset)) {
-				for(let stream of streams) {
-					stream.append(fs.createReadStream(compiler.assets[asset].existsAt), {name: asset});
-				}
-			}
-		}
+    const assets = glob(options.entry);
+
+    assets.forEach(function (asset) {
+      for(let stream of streams) {
+        stream.append(fs.createReadStream(asset), {name: path.basename(asset)});
+      }
+    });
 
 		// Finalize streams
 		for(let stream of streams) {
