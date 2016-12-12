@@ -55,6 +55,9 @@ WebpackArchivePlugin.prototype.apply = function(compiler) {
 
     assets.forEach(function (asset) {
       for(let stream of streams) {
+        if (options.replace) {
+          asset = asset.replace(/^dist\//, '');
+        }
         stream.append(fs.createReadStream(asset), {name: asset});
       }
     });
