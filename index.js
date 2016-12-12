@@ -55,7 +55,7 @@ WebpackArchivePlugin.prototype.apply = function(compiler) {
 
     assets.forEach(function (asset) {
       for(let stream of streams) {
-        stream.append(fs.createReadStream(asset), {name: path.basename(asset)});
+        stream.append(fs.createReadStream(asset), {name: asset});
       }
     });
 
