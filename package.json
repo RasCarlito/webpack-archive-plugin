@@ -1,8 +1,8 @@
 {
   "name": "webpack-archive-plugin",
-  "version": "2.0.0",
-  "description": "Webpack plugin to create archives of emitted files",
-  "repository": "git+https://github.com/autochthe/webpack-archive-plugin.git",
+  "version": "3.0.1",
+  "description": "Webpack plugin to create archives of a given directory",
+  "repository": "git+https://github.com/rascarlito/webpack-archive-plugin.git",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
