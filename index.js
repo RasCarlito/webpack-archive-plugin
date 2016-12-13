@@ -3,7 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 const archiver = require('archiver');
-// const mkdirp = require('mkdirp');
+const mkdirp = require('mkdirp');
 const glob = require('glob');
 
 function WebpackArchivePlugin(options = {}) {
@@ -20,6 +20,9 @@ WebpackArchivePlugin.prototype.apply = function(compiler) {
 		// Set output location
 		const output = options.output?
 			options.output:compiler.options.output.path;
+
+		// Create output folder if it doesn't exist
+		mkdirp.sync(path.basename(output));
 
 		// Create archive streams
 		let streams = [];
@@ -51,17 +54,17 @@ WebpackArchivePlugin.prototype.apply = function(compiler) {
 		}
 
 		// Add assets
-    const assets = glob.sync(options.entry, { nodir: true });
+		const assets = glob.sync(options.entry, { nodir: true });
 
-    assets.forEach(function (asset) {
-      for(let stream of streams) {
-        let name = asset;
-        if (options.replace) {
-          name = asset.replace(options.replace, '');
-        }
-        stream.append(fs.createReadStream(asset), {name: name});
-      }
-    });
+		assets.forEach(function (asset) {
+			for(let stream of streams) {
+				let name = asset;
+				if (options.replace) {
+					name = asset.replace(options.replace, '');
+				}
+				stream.append(fs.createReadStream(asset), {name: name});
+			}
+		});
 
 		// Finalize streams
 		for(let stream of streams) {
