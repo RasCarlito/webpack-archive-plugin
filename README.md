@@ -1,6 +1,6 @@
 # webpack-archive-plugin
 
-Webpack plugin to create archives of emitted files.
+Webpack plugin to create archives of a given directory.
 
 ## Installation
 
@@ -19,7 +19,9 @@ module.exports = {
 		path: __dirname + '/dist',
 	},
 	plugins: [
-		new ArchivePlugin(),
+		new ArchivePlugin({
+      entry: __dirname + '/dist'
+    }),
 	],
 }
 ```
@@ -35,6 +37,8 @@ The options object supports the following properties:
 
 | Prop		| Type			| Description
 | ----		| ----			| ----
+| entry   | string    | Directory to compress
+| replace | string OR regex | Part to remove from file paths inside archive
 | output	| string		| Output location / name of archives (without extension)
 | format	| string OR Array	| Archive formats to use, can be `'tar'` or `'zip'`
 
