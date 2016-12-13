@@ -22,7 +22,7 @@ WebpackArchivePlugin.prototype.apply = function(compiler) {
 			options.output:compiler.options.output.path;
 
 		// Create output folder if it doesn't exist
-		mkdirp.sync(path.basename(output));
+		mkdirp.sync(path.dirname(output));
 
 		// Create archive streams
 		let streams = [];

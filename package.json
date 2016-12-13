@@ -1,6 +1,6 @@
 {
   "name": "webpack-archive-plugin",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Webpack plugin to create archives of a given directory",
   "repository": "git+https://github.com/rascarlito/webpack-archive-plugin.git",
   "main": "index.js",
